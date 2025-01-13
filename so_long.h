@@ -14,21 +14,30 @@
 #define COLECTABLE 'C'
 #define EXIT    'E'
 #define PLAYER  'P'
+
+
+# define ESC 65307
+
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
+
 typedef struct s_flood
 {
         char **map_copy;
-        int vertical;
-        int horizontal;
+        int column;
+        int rows;
         int colectables;
         int exit;
 }       t_flood;
 
 typedef struct s_map
 {
-        int horizontal;
-        int vertical;
+        int rows;
+        int column;
         char **map;
-        int map_wid;
+        int map_width;
         int map_hight
 
 }       t_map;
@@ -48,7 +57,7 @@ typedef struct s_player
         int x;
         int y;
         int moves;
-        int m_colectables;
+        int t_colectables;
 }       t_player;
 
 
@@ -76,6 +85,7 @@ int read_map(char *file,t_data *vars);
 //error----------
 void error();
 void free_map(char **map, t_data *vars);
+void close_window(t_data *vars);
 //map_utils---------
 int strlen_no_n(char *map);
 void check_map(t_data *vars);
@@ -85,5 +95,16 @@ void floodfill(t_flood *flood,int x, int y);
 void check_if_map_is_playable(t_data *vars);
 void check_conditions(t_data *vars);
 void check_player_position(t_data *vars);
+void count_elements(t_data *vars,int *p_count, int *c_count, int *e_count);
+int count_colletables(t_data *vars);
+//---------draw-------------
+void draw_sprite(t_data *vars,void *sprite, int x, int y);
+void draw_block(t_data *vars, int x, int y);
+void draw_game(t_data *vars);
+
+//game--------HOOKS----
+void move_player(t_data *vars, int x_dif, int y_dif);
+void key_hooks(t_data *vars, int key);
+void game_hook(t_data *vars);
 
 #endif

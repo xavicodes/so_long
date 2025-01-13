@@ -36,7 +36,7 @@ int create_matrix(char *file, t_data *vars)
         char *line;
 
         i = 0;
-        vars->game.map = malloc(vars->game.horizontal *sizeof(char *));
+        vars->game.map = malloc(vars->game.rows *sizeof(char *));
         if(!vars->game.map)
                 return(1);
         fd = open(file, O_RDONLY);
@@ -51,8 +51,8 @@ int create_matrix(char *file, t_data *vars)
         check_walls(vars);
         check_map(vars);
         check_letters(vars);
-        vars->game.map_wid = vars->game.vertical * 32;
-        vars->game.map_hight = vars->game.horizontal * 32;
+        vars->game.map_width = vars->game.column * 32;
+        vars->game.map_hight = vars->game.rows * 32;
 }
 int read_map(char *file, t_data *vars)
 {
@@ -66,12 +66,12 @@ int read_map(char *file, t_data *vars)
                 free(line);
                 return(1);
         }
-        vars->game.vertical = 0;
-        while(line[vars->game.vertical] != '\n' || file[vars->game.vertical] != '\0')
-        vars->game.vertical++;
+        vars->game.column = 0;
+        while(line[vars->game.column] != '\n' || file[vars->game.column] != '\0')
+        vars->game.column++;
         while(line)
         {
-                vars->game.horizontal++;
+                vars->game.rows++;
                 free(line);
                 line = get_next_line(fd);
         }

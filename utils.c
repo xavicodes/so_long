@@ -61,10 +61,10 @@ void count_elements(t_data *vars,int *p_count, int *c_count, int *e_count)
         *c_count = 0;
         *e_count = 0;    
         
-        while(vars->game.horizontal > i)
+        while(vars->game.rows > i)
         {
                 j = 0;
-                while(j < vars->game.vertical)
+                while(j < vars->game.column)
                 {
                 if(vars->game.map[i][j] == 'C' )
                         *c_count++;
@@ -78,4 +78,26 @@ void count_elements(t_data *vars,int *p_count, int *c_count, int *e_count)
                 }
         i++;
         }
+}
+int count_colletables(t_data *vars)
+{
+
+        int i;
+        int j;
+        int count;
+
+        count = 0;
+        i = 0;
+        while(vars->game.map[i] != '\0' || vars->game.map[i] != '\n')
+        {
+                j = 0;
+                while(vars->game.map[i][j] != '\0' || vars->game.map[i][j] != '\n')
+                {
+                        if(vars->game.map[i][j] == 'C')
+                                count++;
+                j++;
+                }
+        i++;
+        }
+        return(count);
 }

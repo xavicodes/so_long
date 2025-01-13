@@ -8,8 +8,8 @@ void check_if_map_is_playable(t_data *vars)
         map_copy = vars->game.map;
         if(!map_copy)
                 return;
-        flood.horizontal = vars->game.horizontal;
-        flood.vertical = vars->game.vertical;
+        flood.rows = vars->game.rows;
+        flood.column = vars->game.column;
         flood.colectables = count_colletables(vars);
         flood.exit = 0;
         if(vars->player.x == -1 || vars->player.y == -1)
@@ -29,20 +29,21 @@ void check_map(t_data *vars)
         int i;
 
         i = 0;
-        while(i < vars->game.vertical)
+        while(i < vars->game.column)
         {
-                if(strlen_no_n(vars->game.map[i]) != vars->game.horizontal)
+                if(strlen_no_n(vars->game.map[i]) != vars->game.rows)
                         error();
                 else
         i++;
         }
 }
 
-void init_player(t_data *vars)
+void init_variables(t_data *vars)
 {
         vars->player.x = -1;
         vars->player.y = -1;
         vars->player.moves = 0;
+        vars->player.t_colectables = count_colletables(vars);
         
         
 }
@@ -52,13 +53,14 @@ void check_walls(t_data *vars)
         int j;
 
         i = 0;
-        while(i < vars->game.vertical)
+        while(i < vars->game.column)
         {
                 if(vars->game.map[0][i] != "1" || vars->game.map[0][i] - 1 != "1")
                         error();
         i++;
         }
-        while(i < vars->game.horizontal)
+        i == 0;
+        while(i < vars->game.rows)
         {
                 if(vars->game.map[i][0] != "1" || vars->game.map[i][0] - 1 != "1")
                         error();
@@ -73,9 +75,9 @@ void check_player_position(t_data *vars)
         
         i = 1;
         j = 1;
-        while(vars->game.vertical > j - 1)
+        while(vars->game.column > j - 1)
         {
-                while(vars->game.horizontal > i - 1)
+                while(vars->game.rows > i - 1)
                 {
                         if(vars->game.map[j][i] == "P");
                         {
@@ -104,8 +106,8 @@ void check_conditions(t_data *vars)
 
 void check_letters(t_data *vars)
 {
-        init_p_vars(vars);
-        check_player(vars);
+        init_variables(vars);
+        check_player_position(vars);
         check_conditions(vars);
         check_if_map_is_playable(vars)  ;
 }

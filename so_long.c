@@ -6,7 +6,7 @@
 /*   By: xaviermonteiro <xaviermonteiro@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:38:30 by xaviermonte       #+#    #+#             */
-/*   Updated: 2025/01/13 11:49:08 by xaviermonte      ###   ########.fr       */
+/*   Updated: 2025/01/13 14:37:57 by xaviermonte      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int main(int ac, char **av)
                         read_map(**av,&vars);
                 }
                 else
-                return;
+                        return;
         void *mlx;
-       vars.mlx = mlx_init();
-       create_window(&vars);
-       store_sprites(&vars);
-       draw_game(&vars);
-       game_hooks(&vars);
-       mlx_loop(&vars.mlx);
+        vars.mlx = mlx_init();
+        create_window(&vars);
+        store_sprites(&vars);
+        draw_game(&vars);
+        game_hooks(&vars);
+        mlx_loop(&vars.mlx);
        
 } 
